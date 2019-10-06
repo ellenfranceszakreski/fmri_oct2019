@@ -1,4 +1,4 @@
-% prepro run matlabbatch to preprocess one subject
+% prepro_job_template run matlabbatch to preprocess one subject
 % use this as a template when making CIC cluster jobs for each participant.
 % append this code after defining variable, subx
 % e.g. subx = 'sub3'
