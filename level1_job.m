@@ -1,5 +1,5 @@
-% level1_spec_job
-% level 1 model specification job for 1 subject
+% level1_job
+% level 1 model specification and estimation job for 1 subject
 % do this after prepreprocessing and after selecting regressors/conditions, but before level 1 model estimation
 
 pp_prefix = 's12wau'; % prefix of preprocessed EPI's
@@ -157,3 +157,9 @@ matlabbatch{15}.spm.stats.fmri_spec.global = 'None';
 matlabbatch{15}.spm.stats.fmri_spec.mthresh = 0.8;
 matlabbatch{15}.spm.stats.fmri_spec.mask = {''};
 matlabbatch{15}.spm.stats.fmri_spec.cvi = 'AR(1)';
+
+%% estimation
+matlabbatch{16}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
+    substruct('.','val', '{}',{15}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{16}.spm.stats.fmri_est.write_residuals = 1;
+matlabbatch{16}.spm.stats.fmri_est.method.Classical = 1;
