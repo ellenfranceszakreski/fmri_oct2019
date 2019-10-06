@@ -1,5 +1,8 @@
 #!/bin/sh
-# remake_Level1.sh
+# source remake_Level1.sh
+# requirements
+# ../Scripts/Level1_subjects.txt
+# preprocessing for Level1 subjects must be complete (assuming prefix is s12wau)
 
 AnalysisDir=/data/scratch/zakell/fmri_oct2019
 Level1Dir=$AnalysisDir/Level1
@@ -23,7 +26,6 @@ do
   fi
 done
 unset subx
-
 ## remake level 1 directory
 test -d $Level1Dir && rm -r $Level1Dir
 
@@ -34,3 +36,19 @@ do
   cp -v $AnalysisDir/Input/$subx/$preproPrefix$subx"_run"*".nii" $Level1Dir/$subx
 done
 unset subx
+
+## add conditions and regressors
+# go to directory containing the .m code for making conditions and regressors
+InitialDir=$(pwd);
+cd $AnalysisDir/Scripts
+
+# load modules to access MATLAB
+source $AnalysisDir/Scripts/load_modules.sh
+matlab -nodisplay -nosplash -nodesktop -r "select_conditions_and_regressors({'control','stress'},{'difficulty','rp_');exit"
+
+# return to initial directory
+cd $InitialDir
+
+## done
+unset InitialDir preproPrefix Level1Dir
+###
