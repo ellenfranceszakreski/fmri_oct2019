@@ -31,6 +31,6 @@ test -d $Level1Dir && rm -r $Level1Dir
 for subx in `cat $Level1Subjects`
 do
   mkdir $Level1Dir/$subx
-  cp -v $AnalysisDir/Input/$subx/$preproPrefix$subx"_run*.nii" $Level1Dir/$subx
+  cp -v $AnalysisDir/Input/$subx/$preproPrefix$subx"_run"*".nii" $Level1Dir/$subx
 done
 unset subx
