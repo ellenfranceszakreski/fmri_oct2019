@@ -1,15 +1,22 @@
-% prepro run matlabbatch to preprocess one subject 
+% prepro run matlabbatch to preprocess one subject
+% use this as a template when making CIC cluster jobs for each participant.
 % append this code after defining variable, subx
 % e.g. subx = 'sub3'
-addpath('/data/scratch/zakell/fmri_oct2019/Scripts');
 
-%% get data for subjext
-[subxDir, runxs] = prepare_subx(subx); % .m file is in Scripts folder
-clear subx
-assert(numel(runxs)==3, 'unexpected number of runs.');
-clear runxs
- 
-%% prepare data
+%% set up cluster
+number_of_cores=12;
+d=tempname();% get temporary directory location
+mkdir(d);
+% create cluster
+cluster = parallel.cluster.Local('JobStorageLocation',d,'NumWorkers',number_of_cores);
+matlabpool(cluster, number_of_cores);
+
+%% run analysis
+% get data for subject
+addpath('/data/scratch/zakell/fmri_oct2019/Scripts');
+subxDir = prepare_subx(subx);clear subx % .m file is in Scripts folder
+
+% gather input
 jobs = {'/data/scratch/zakell/fmri_oct2019/Scripts/prepro_job.m'};
 inputs = cell(4, 1);
 addpath(genpath(fullfile(spm('dir'),'config')));
