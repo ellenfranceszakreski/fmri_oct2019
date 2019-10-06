@@ -6,6 +6,7 @@ function [subxDir, runxs] = prepare_subx(subx)
 % e.g. [subxDir, runxs] = prepare_subx('sub3');
 % assumes analysis directory is /data/scratch/zakell/fmri_oct2019
 % WARNING: Deletes any files in Analysis directory for this subject if they exist
+% keep this file in /data/scratch/zakell/fmri_oct2019/Scripts
 
 %% validate subx
 assert(ischar(subx),'subx must be character vector.');
