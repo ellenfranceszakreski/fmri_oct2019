@@ -3,7 +3,6 @@ function setup_analysis(name, preprocessing_prefix, condition_names, regressor_n
 % setup_analysis(preprocessing_prefix, name, conditions, regressors)
 % e.g. setup_analysis('s12wau', 'cue_difficulty_movement', {'control','stress'}, {'difficulty','rp_'}, optional_subxs)
 
-
 %% directories
 AnalysisDir='/data/scratch/zakell/fmri_oct2019';
 addpath([AnalysisDir,'/Scripts']);
