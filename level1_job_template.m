@@ -1,7 +1,7 @@
 % level1_job_template run matlabbatch to preprocess one subject
 % use this as a template when making CIC cluster jobs for each participant.
-% append this code after defining variable, subx and AnalysisName
-% e.g. subx='sub3'; AnalysisName = 'cue_difficulty_movement';
+% append this code after defining variable
+% e.g. subx='sub3';
 
 %% set up cluster
 number_of_cores=12;
@@ -13,7 +13,8 @@ matlabpool(cluster, number_of_cores);
 
 %% run analysis
 % get data for subject
-subxDir = ['/data/scratch/zakell/fmri_oct2019/',AnalysisName,'/',subx];
+subxDir = ['/data/scratch/zakell/fmri_oct2019/Level1/',subx];
+assert(exist(subxDir,'dir')==7,'Could not find subject directory.%s',subxDir)
 
 % gather input
 jobs = {'/data/scratch/zakell/fmri_oct2019/Scripts/level1_job.m'};
