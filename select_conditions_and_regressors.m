@@ -3,6 +3,8 @@ function Datasubxs = select_conditions_and_regressors(condition_names,regressor_
 % e.g. select_conditions({'stress','control','timeout','incorrect','correct'},{'difficulty','rp_'})
 % (re)makes files e.g., selected_conditions_sub3_run1.mat selected_regressors_sub3_run1.mat
 % adds information about condition onsets and MIST log data from ../Data/dataset_subx_runx.mat
+% do this after calling remake_Level1.sh
+
 
 %% parse input
 % condition names
@@ -31,15 +33,16 @@ clear rp_ii
 AnalysisDir='/data/scratch/zakell/fmri_oct2019';
 assert(exist(AnalysisDir,'dir')==7,'Invalid analysis directory\n%s',AnalysisDir);
 DataDir=[AnalysisDir,'/Data']; % contains datasets for each subject and run (made on my mac w/ prepare_table_for_cic.m)
-InputDir=[AnalysisDir,'/Input']; % contains directory for each subject
+Level1Dir=[AnalysisDir,'/Level1']; % contains directory for each subject
+assert(exist(Level1Dir,'dir')==7,'Invalid analysis level 1 directory\n%s\ncall %s/Scripts/remake_Level1.sh.',Level1Dir,AnalysisDir);
 clear AnalysisDir
 
 %% remove old selected conditions/regressors .mat for each subject in Input directory (if any exist)
-Inputsubxs = regexp(ls(InputDir),'\<sub\d+\>','match');
-assert(~isempty(Inputsubxs),'Could not find any subjects in Input directory.');
-for n=1:numel(Inputsubxs)
-    if ~isempty(regexp(ls([InputDir,'/',Inputsubxs{n}]), 'selected_(conditions|regressors)_','once'))
-        delete([InputDir,'/',Inputsubxs{n},'/selected_*.mat']);
+Level1subxs = regexp(ls(Level1Dir),'\<sub\d+\>','match');
+assert(~isempty(Level1subxs),'Could not find any subjects in Input directory.');
+for n=1:numel(Level1subxs)
+    if ~isempty(regexp(ls([Level1Dir,'/',Level1subxs{n}]), 'selected_(conditions|regressors)_','once'))
+        delete([Level1Dir,'/',Level1subxs{n},'/selected_*.mat']);
     end
 end; clear n
 
@@ -50,13 +53,13 @@ assert(~isempty(subx_runxs),'Could not find any subjects in Data directory.');
 % ensure that Data subjects have Input too
 % (not all subjects in Input have Data, e.g. sub21)
 Datasubxs = regexprep(subx_runxs,'_run\d+','');
-noInput = ~ismember(Datasubxs,Inputsubxs);
+noInput = ~ismember(Datasubxs,Level1subxs);
 if any(noInput)
     disp('error The following subjects are in Data but not in Input')
     disp(unique(Datasubxs(noInput)','stable'));
     error('Subjects in Data but not in Input');
 end
-clear noInput Inputsubxs
+clear noInput Level1subxs
 
 
 %% make selected_conditions .mat file for each subject in Data directory (save it in Input/subx)
@@ -79,7 +82,7 @@ end
         ScanInd = strcmp(ds.event, 'ExpectedScan'); % index occurance of each TR (should be 139 scans);
         % each regressor must have a row for each scan
         if include_rp % add movement parameters
-            rp_mat = importdata( [InputDir,'/',subx,'/rp_',subx_runx,'.txt'] ); % txt file generated from realignment step
+            rp_mat = importdata( [Level1Dir,'/',subx,'/rp_',subx_runx,'.txt'] ); % txt file generated from realignment step
             % check size of movement parameter matrix
             assert(size(rp_mat,2)==numel(rp_names), 'rp_%s.txt has unexpected number of parameters.',subx_runx);
             assert(size(rp_mat,1)==sum(ScanInd), 'rp_%s.txt has unexpected number of rows.',subx_runx);
@@ -98,7 +101,7 @@ end
             mat(:, r) = ds.(names{r})(ScanInd);
         end
         % save selected_regressor_names to a .mat file
-        save([InputDir,'/',subx,'/selected_regressor_names.mat'], 'names','-mat');
+        save([Level1Dir,'/',subx,'/selected_regressor_names.mat'], 'names','-mat');
         clear r mat names ScanInd
         %% selected conditions
         names = condition_names;
@@ -115,7 +118,7 @@ end
             durations{c} = ds.duration(ii);
         end
         clear c name ii
-        save([InputDir,'/',subx,'/selected_conditions_',subx_rubx,'.mat'], 'names','onsets','durations','-mat');
+        save([Level1Dir,'/',subx,'/selected_conditions_',subx_rubx,'.mat'], 'names','onsets','durations','-mat');
     end
 %%--
 end
