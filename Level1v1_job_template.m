@@ -16,7 +16,7 @@ matlabpool(cluster, number_of_cores);
 %% run analysis
 % get data for subject
 
-addpath([AnalysisDir,'/Scripts']);
+addpath('/data/scratch/zakell/fmri_oct2019/Scripts');
 addpath(genpath(fullfile(spm('dir'),'config')));
 
 [jobs, spmDir] = make_Level1v1_matlabbatch_for_subx(subx); % .m file is in Scripts folder (deletes pre-existing level 1 directory content for this subject if it exists);
