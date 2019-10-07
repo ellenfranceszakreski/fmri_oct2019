@@ -7,7 +7,7 @@ ppPrefix = 's12wau';
 AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <-make sure this correct!
 
 matlabbatch = {};
-
+x = 1;
 matlabbatch{x}.spm.stats.fmri_spec.dir = {fullfile(AnalysisDir, Level1Version, subx)};
 matlabbatch{x}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{x}.spm.stats.fmri_spec.timing.RT = 2.552;
@@ -47,7 +47,7 @@ for r=1:nRun
     
     %% regressors
     %     % if no single regressor
-         matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress = struct('name', {}, 'val', {});
+    matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress = struct('name', {}, 'val', {});
     
     %     matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).name = 'difficulty';
     %     matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).val = ds.difficulty(strcmp(ds.event,'DetectedScan'));
@@ -55,7 +55,21 @@ for r=1:nRun
     clear ds
     % add movement parameters as regressors
     matlabbatch{x}.spm.stats.fmri_spec.sess(r).multi_reg = {[AnalysisDir, '/Input/', subx, '/rp_',subx_runx,'.txt']};
-    
-end
+    matlabbatch{x}.spm.stats.fmri_spec.sess(r).hpf = 348; % must be long becuase of long stimulus presentation
+end % done each session
+matlabbatch{x}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
+matlabbatch{x}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0]; % no temporal dirative or dispersion
+matlabbatch{x}.spm.stats.fmri_spec.volt = 1;
+matlabbatch{x}.spm.stats.fmri_spec.global = 'None';
+matlabbatch{x}.spm.stats.fmri_spec.mthresh = 0.8;
+matlabbatch{x}.spm.stats.fmri_spec.mask = {''};
+matlabbatch{x}.spm.stats.fmri_spec.cvi = 'AR(1)';
 
+%% level 1 model estimation
+x = x+1;
+matlabbatch{x}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
+    substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{x}.spm.stats.fmri_est.write_residuals = 1;
+matlabbatch{x}.spm.stats.fmri_est.method.Classical = 1;
+%% done
 end
