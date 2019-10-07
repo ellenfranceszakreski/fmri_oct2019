@@ -1,14 +1,19 @@
-function matlabbatch = make_Level1_matlabbatch_for_subx(subx)
-% make_Level1_matlabbatch_for_subx make a matlabbatch cell array for level1 model specification
-% e.g. matlabbatch = make_Level1_matlabbatch_for_subx('sub2');
+function [matlabbatch, spmDir] = make_Level1v1_matlabbatch_for_subx(subx)
+% make_Level1_matlabbatch_for_subx make a matlabbatch cell array for level1 model specification and estimation
+% e.g. [matlabbatch, spmDir] = make_Level1_matlabbatch_for_subx('sub2');
 
-Level1Version='Level1v1';
-ppPrefix = 's12wau';
 AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <-make sure this correct!
+spmDir=[AnalysisDir,'/Level1v1/',subx];
+if exist(spmDir,'dir')==7 && ~isempty(ls(spmDir))
+    delete([spmDir,'/*']);
+else
+    mkdir(spmDir); %where level 1 SPM.mat will be keps
+end
 
+ppPrefix = 's12wau';
 matlabbatch = {};
 x = 1;
-matlabbatch{x}.spm.stats.fmri_spec.dir = {fullfile(AnalysisDir, Level1Version, subx)};
+matlabbatch{x}.spm.stats.fmri_spec.dir = {spmDir};
 matlabbatch{x}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{x}.spm.stats.fmri_spec.timing.RT = 2.552;
 matlabbatch{x}.spm.stats.fmri_spec.timing.fmri_t = 44;
@@ -64,12 +69,11 @@ matlabbatch{x}.spm.stats.fmri_spec.global = 'None';
 matlabbatch{x}.spm.stats.fmri_spec.mthresh = 0.8;
 matlabbatch{x}.spm.stats.fmri_spec.mask = {''};
 matlabbatch{x}.spm.stats.fmri_spec.cvi = 'AR(1)';
-
-%% level 1 model estimation
+%% model estimation
 x = x+1;
 matlabbatch{x}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
     substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{x}.spm.stats.fmri_est.write_residuals = 1;
 matlabbatch{x}.spm.stats.fmri_est.method.Classical = 1;
-%% done
+
 end
