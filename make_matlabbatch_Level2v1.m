@@ -10,7 +10,7 @@ end
 
 matlabbatch = {};
 matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.name = 'Level2Dir';
-matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.dirs = {Level2Dir};
+matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.dirs = {{Level2Dir}};
 % cd
 matlabbatch{2}.cfg_basicio.file_dir.dir_ops.cfg_cd.dir(1) = cfg_dep('Named Directory Selector: Level2Dir(1)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','dirs', '{}',{1}));
 % 
