@@ -90,8 +90,8 @@ do
 	  jobfile=$JobDir/$subx"_run"$r_"job.m"
 	  touch $jobfile
 	  # prepend code setting variable "subx" to this subject
-	  echo "subx = '"$subx"';" >> $jobfile # note subject names are character vectors (e.g. 'sub2', 'sub10', etc.)
-    echo "runx = 'run"$r"';" >> $jobfile # note subject names are character vectors (e.g. 'run1','run2','run3')
+	  echo "subx = '"$subx"';" > $jobfile # note subject names are character vectors (e.g. 'sub2', 'sub10', etc.)
+          echo "runx = 'run"$r"';" >> $jobfile # note subject names are character vectors (e.g. 'run1','run2','run3')
 	  # add code to job .m file (same for all subjects)
 	  cat $TemplateFile >> $jobfile
 	  echo "made "$jobfile
