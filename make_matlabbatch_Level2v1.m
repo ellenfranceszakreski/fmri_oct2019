@@ -1,6 +1,6 @@
-function make_matlabbatch_Level2v1
+function make_matlabbatch_Level2v1(con_000x);
 AnalysisDir='/data/scratch/zakell/fmri_oct2019';
-con_000x='con_0001';
+con_000x=validatestring(con_000x,{'con_0001','con_0002'});
 Level2Dir=[AnalysisDir,'/Level2v1'];
 if exist(Level2Dir,'dir')~=7
     mkdir(Level2Dir)
