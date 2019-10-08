@@ -83,9 +83,9 @@ cicjoblistFile=$JobDir/cicjoblist
 # job list
 touch $cicjoblistFile
 # for each subject in subjects.txt
-for subx in `cat "$SubjectList"`
+for runx in {"run1","run2","run3"}
 do
-	for runx in {"run1","run2","run3"}
+	for subx in `cat "$SubjectList"`
 	do
 		# make job file for this subject
 		jobfile=$JobDir/$subx"_"$runx"_job.m"
@@ -99,9 +99,8 @@ do
 		# append command for starting job for this subject to the job list file
 		echo "matlab -nodesktop -nodisplay -nosplash -r \"run('"$jobfile"')\"" >> $cicjoblistFile
   	done
-  	unset runx
 done
-unset subx
+unset subx runx
 
 # use job file from last subject to make test job list
 test_cicjoblistFile=$JobDir/test_cicjoblist
