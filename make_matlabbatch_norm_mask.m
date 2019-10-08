@@ -67,5 +67,13 @@ matlabbatch{k}.spm.spatial.normalise.write.woptions.bb = [-78 -112 -70
 matlabbatch{k}.spm.spatial.normalise.write.woptions.vox = norm_voxel;
 matlabbatch{k}.spm.spatial.normalise.write.woptions.interp = 7;
 matlabbatch{k}.spm.spatial.normalise.write.woptions.prefix = 'w';
-%%
+
+%%--subfunction
+function cstr = subfun_get_file(filedescription, ptrn)
+    [f,~] = spm_select('ExtFPList', subxDir, ptrn, Inf);
+    assert(~isempty(f),'Could not find %s', filedescription);
+    cstr = cellstr(f);
+end
+%---
+
 end
