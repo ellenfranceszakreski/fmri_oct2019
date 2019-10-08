@@ -30,7 +30,7 @@ k = 1;
 % tissue channel and basic corrected to input
 for ii = 1:chN
     matlabbatch{k}.spm.util.imcalc.input(ii) = subfun_get_file(...
-        ['tissue channel ',tissue_channels{ii}], ['^c',tissue_channels{ii},'_sub\d+_anat.nii']); %#ok<AGROW>
+        ['tissue channel ',tissue_channels{ii}], ['^c',tissue_channels{ii},'sub\d+_anat.nii']); %#ok<AGROW>
 end; clear ii tissue_channels
 % add bias corrected image at end of input
 matlabbatch{k}.spm.util.imcalc.input(chN+1) = subfun_get_file('bias corrected anatomical image','^msub\d+_anat.nii');
@@ -71,7 +71,7 @@ matlabbatch{k}.spm.spatial.normalise.write.woptions.prefix = 'w';
 %%--subfunction
 function cstr = subfun_get_file(filedescription, ptrn)
     [f,~] = spm_select('ExtFPList', subxDir, ptrn, Inf);
-    assert(~isempty(f),'Could not find %s', filedescription);
+    assert(~isempty(f),'Could not find %s (%s)', filedescription, ptrn);
     cstr = cellstr(f);
 end
 %---
