@@ -85,22 +85,21 @@ touch $cicjoblistFile
 # for each subject in subjects.txt
 for subx in `cat "$SubjectList"`
 do
-  for r in {1..3}
-  do
-	runx="run"$r
-	  # make job file for this subject
-	  jobfile=$JobDir/$subx"_"$runx"_job.m"
-	  touch $jobfile
-	  # prepend code setting variable "subx" to this subject
-	  echo "subx = '"$subx"';" > $jobfile  # note subject names are character vectors (e.g. 'sub2', 'sub10', etc.)
-          echo "runx = '"$runx"';" >> $jobfile # note subject names are character vectors (e.g. 'run1','run2','run3')
-	  # add code to job .m file (same for all subjects)
-	  cat $TemplateFile >> $jobfile
-	  echo "made "$jobfile
-	  # append command for starting job for this subject to the job list file
-	  echo "matlab -nodesktop -nodisplay -nosplash -r \"run('"$jobfile"')\"" >> $cicjoblistFile
-  done
-  unset r runx
+	for runx in {"run1","run2","run3"}
+	do
+		# make job file for this subject
+		jobfile=$JobDir/$subx"_"$runx"_job.m"
+		touch $jobfile
+		# prepend code setting variable "subx" to this subject
+		echo "subx = '"$subx"';" > $jobfile  # note subject names are character vectors (e.g. 'sub2', 'sub10', etc.)
+		echo "runx = '"$runx"';" >> $jobfile # note subject names are character vectors (e.g. 'run1','run2','run3)
+		# add code to job .m file (same for all subjects)
+		cat $TemplateFile >> $jobfile
+		echo "made "$jobfile
+		# append command for starting job for this subject to the job list file
+		echo "matlab -nodesktop -nodisplay -nosplash -r \"run('"$jobfile"')\"" >> $cicjoblistFile
+  	done
+  	unset runx
 done
 unset subx
 
