@@ -31,7 +31,7 @@ matlabbatch{3}.spm.stats.factorial_design.des.fd.fact(2).ancova = 0;
 %%
 ds = importdata([AnalysisDir,'/Data/AllSubjects.mat']);
 % image names (e.g. .../Input/sub10/con_0001.nii)
-ds.con_000x = strcat(AnalysisDir,'/Input/', ds.subx,'/' con_000x, '.nii');
+ds.con_000x = strcat(AnalysisDir,'/Input/', ds.subx,'/',con_000x, '.nii');
 con000x_exists_ind=false(size(ds,1),1);
 for n=1:size(ds,1)
     con000x_exists_ind(n) = exist(ds.con_000x{n}, 'file') == 2;
