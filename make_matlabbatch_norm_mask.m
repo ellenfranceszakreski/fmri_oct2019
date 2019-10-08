@@ -34,6 +34,7 @@ for ii = 1:chN
 end; clear ii tissue_channels
 % add bias corrected image at end of input
 matlabbatch{k}.spm.util.imcalc.input(chN+1) = subfun_get_file('bias corrected anatomical image','^msub\d+_anat.nii');
+matlabbatch{k}.spm.util.imcalc.input = cellstr(matlabbatch{k}.spm.util.imcalc.input);
 
 % new file name
 maskFile=fullfile(subxDir, [maskName,'.nii']);
