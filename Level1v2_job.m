@@ -39,6 +39,7 @@ matlabbatch{13}.spm.stats.fmri_spec.timing.units = 'scans';
 matlabbatch{13}.spm.stats.fmri_spec.timing.RT = 2.552;
 matlabbatch{13}.spm.stats.fmri_spec.timing.fmri_t = 44;
 matlabbatch{13}.spm.stats.fmri_spec.timing.fmri_t0 = 22;
+% run1
 matlabbatch{13}.spm.stats.fmri_spec.sess(1).scans(1) = cfg_dep('Named File Selector: smoothed(1) - Files', substruct('.','val', '{}',{8}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files', '{}',{1}));
 matlabbatch{13}.spm.stats.fmri_spec.sess(1).cond(1).name = 'control';
 matlabbatch{13}.spm.stats.fmri_spec.sess(1).cond(1).onset = [1
@@ -60,6 +61,7 @@ matlabbatch{13}.spm.stats.fmri_spec.sess(1).multi = {''};
 matlabbatch{13}.spm.stats.fmri_spec.sess(1).regress = struct('name', {}, 'val', {});
 matlabbatch{13}.spm.stats.fmri_spec.sess(1).multi_reg(1) = cfg_dep('File Selector (Batch Mode): Selected Files (^rp_sub\d+_run1.txt)', substruct('.','val', '{}',{10}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{13}.spm.stats.fmri_spec.sess(1).hpf = 384;
+% run2
 matlabbatch{13}.spm.stats.fmri_spec.sess(2).scans(1) = cfg_dep('Named File Selector: smoothed(2) - Files', substruct('.','val', '{}',{8}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files', '{}',{2}));
 matlabbatch{13}.spm.stats.fmri_spec.sess(2).cond(1).name = 'control';
 matlabbatch{13}.spm.stats.fmri_spec.sess(2).cond(1).onset = [1
@@ -81,6 +83,7 @@ matlabbatch{13}.spm.stats.fmri_spec.sess(2).multi = {''};
 matlabbatch{13}.spm.stats.fmri_spec.sess(2).regress = struct('name', {}, 'val', {});
 matlabbatch{13}.spm.stats.fmri_spec.sess(2).multi_reg(1) = cfg_dep('File Selector (Batch Mode): Selected Files (^rp_sub\d+_run2.txt)', substruct('.','val', '{}',{11}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{13}.spm.stats.fmri_spec.sess(2).hpf = 384;
+% run3
 matlabbatch{13}.spm.stats.fmri_spec.sess(3).scans(1) = cfg_dep('Named File Selector: smoothed(3) - Files', substruct('.','val', '{}',{8}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files', '{}',{3}));
 matlabbatch{13}.spm.stats.fmri_spec.sess(3).cond(1).name = 'control';
 matlabbatch{13}.spm.stats.fmri_spec.sess(3).cond(1).onset = [1
@@ -102,6 +105,7 @@ matlabbatch{13}.spm.stats.fmri_spec.sess(3).multi = {''};
 matlabbatch{13}.spm.stats.fmri_spec.sess(3).regress = struct('name', {}, 'val', {});
 matlabbatch{13}.spm.stats.fmri_spec.sess(3).multi_reg(1) = cfg_dep('File Selector (Batch Mode): Selected Files (^rp_sub\d+_run3.txt)', substruct('.','val', '{}',{12}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{13}.spm.stats.fmri_spec.sess(3).hpf = 384;
+%
 matlabbatch{13}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
 matlabbatch{13}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0];
 matlabbatch{13}.spm.stats.fmri_spec.volt = 1;
@@ -114,9 +118,9 @@ matlabbatch{14}.spm.stats.fmri_est.write_residuals = 1;
 matlabbatch{14}.spm.stats.fmri_est.method.Classical = 1;
 matlabbatch{15}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{14}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{15}.spm.stats.con.consess{1}.tcon.name = '-control+stress';
-matlabbatch{15}.spm.stats.con.consess{1}.tcon.weights = [-0.333333333333333 0.333333333333333];
+matlabbatch{15}.spm.stats.con.consess{1}.tcon.weights = [-0.333333333333333 0.333333333333333]; %movement parameters are 0 padded
 matlabbatch{15}.spm.stats.con.consess{1}.tcon.sessrep = 'replsc';
 matlabbatch{15}.spm.stats.con.consess{2}.tcon.name = '+control-stress';
-matlabbatch{15}.spm.stats.con.consess{2}.tcon.weights = [0.333333333333333 -0.333333333333333];
+matlabbatch{15}.spm.stats.con.consess{2}.tcon.weights = [0.333333333333333 -0.333333333333333]; %movement parameters are 0 padded
 matlabbatch{15}.spm.stats.con.consess{2}.tcon.sessrep = 'replsc';
 matlabbatch{15}.spm.stats.con.delete = 1;
