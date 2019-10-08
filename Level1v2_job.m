@@ -114,8 +114,9 @@ matlabbatch{13}.spm.stats.fmri_spec.mthresh = 0.8;
 matlabbatch{13}.spm.stats.fmri_spec.mask(1) = cfg_dep('File Selector (Batch Mode): Selected Files (^wGm.nii$)', substruct('.','val', '{}',{9}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{13}.spm.stats.fmri_spec.cvi = 'AR(1)';
 matlabbatch{14}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File', substruct('.','val', '{}',{13}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
-matlabbatch{14}.spm.stats.fmri_est.write_residuals = 1;
+matlabbatch{14}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{14}.spm.stats.fmri_est.method.Classical = 1;
+%% contrast manager
 matlabbatch{15}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{14}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{15}.spm.stats.con.consess{1}.tcon.name = '-control+stress';
 matlabbatch{15}.spm.stats.con.consess{1}.tcon.weights = [-0.333333333333333 0.333333333333333]; %movement parameters are 0 padded
