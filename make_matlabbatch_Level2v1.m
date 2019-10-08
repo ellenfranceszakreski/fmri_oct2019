@@ -12,9 +12,8 @@ matlabbatch = {};
 matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.name = 'Level2Dir';
 matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.dirs = {{Level2Dir}};
 % cd
-matlabbatch{2}.cfg_basicio.file_dir.dir_ops.cfg_cd.dir(1) = cfg_dep('Named Directory Selector: Level2Dir(1)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','dirs', '{}',{1}));
-% 
-matlabbatch{3}.spm.stats.factorial_design.dir(1) = cfg_dep('Named Directory Selector: Level2Dir(1)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','dirs', '{}',{1}));
+matlabbatch{2}.cfg_basicio.file_dir.dir_ops.cfg_cd.dir = {Level2Dir};
+matlabbatch{3}.spm.stats.factorial_design.dir = {Level2Dir};
 elaLevels = {'low','high'};
 matlabbatch{3}.spm.stats.factorial_design.des.fd.fact(1).name = 'ela'; % low vs. high
 matlabbatch{3}.spm.stats.factorial_design.des.fd.fact(1).levels = numel(elaLevels);
