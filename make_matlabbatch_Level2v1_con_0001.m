@@ -1,8 +1,7 @@
-function make_matlabbatch_Level2v1(con_000x)
+%function make_matlabbatch_Level2v1(con_000x)
 % con_000x = 'con_0001 (-control+stress), con_0002 (+stress-control)
 AnalysisDir='/data/scratch/zakell/fmri_oct2019';
-addpath(genpath([spm('dir'),'/config']));
-con_000x=validatestring(con_000x,{'con_0001','con_0002'});
+con_000x='con_0001'
 Level2Dir=[AnalysisDir,'/Level2v1'];
 if exist(Level2Dir,'dir')~=7
     mkdir(Level2Dir)
@@ -39,6 +38,7 @@ end; clear n
 assert(any(con000x_exists_ind),'Could not find contrast images');
 ds = ds(con000x_exists_ind, :);
 clear con000x_exists_ind
+subfun_index_scans = @(ela,cue)ds.con_000x(strcmp(ds.ela,ela) & strcmp(ds.cue,cue));
 
 % low ela, control cue
 matlabbatch{3}.spm.stats.factorial_design.des.fd.icell(1).levels = [1;1];
@@ -52,7 +52,7 @@ matlabbatch{3}.spm.stats.factorial_design.des.fd.icell(3).scans = subfun_index_s
 
 matlabbatch{3}.spm.stats.factorial_design.des.fd.icell(4).levels = [2;2];
 matlabbatch{3}.spm.stats.factorial_design.des.fd.icell(4).scans = subfun_index_scans('high','mortality');
-clear ds
+clear ds subfun_index_scans
 
 matlabbatch{3}.spm.stats.factorial_design.des.fd.contrasts = 1;
 matlabbatch{3}.spm.stats.factorial_design.cov = struct('c', {}, 'cname', {}, 'iCFI', {}, 'iCC', {});
@@ -82,15 +82,15 @@ matlabbatch{5}.spm.stats.results.units = 1;
 matlabbatch{5}.spm.stats.results.export{1}.ps = true;
 
 %% DO JOB
-spm('defaults', 'FMRI');
-spm_jobman('run', matlabbatch);
+%spm('defaults', 'FMRI');
+%spm_jobman('run', matlabbatch);
 
 %---- subfunctions
-    function cstr = subfun_index_scans(ela,cue)
-        % cellstring array of contrast images of these subjects within this
+    %function cstr = subfun_index_scans(ela,cue)
+    %    % cellstring array of contrast images of these subjects within this
         % group.
-        ii = strcmp(ds.ela, ela) & strcmp(ds.cue, cue);
-        cstr = ds.con_000x(ii);
-    end
+    %    ii = strcmp(ds.ela, ela) & strcmp(ds.cue, cue);
+    %    cstr = ds.con_000x(ii);
+   % end
 %----
-end
+%end
