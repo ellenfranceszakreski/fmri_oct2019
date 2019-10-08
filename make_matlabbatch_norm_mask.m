@@ -26,15 +26,14 @@ assert(isequal(size(norm_voxel), [1 3]),'norm_voxel must be 1x3.');
 %% matlabbatch
 matlabbatch = {};
 %% imcalc
-k = 1;
 % tissue channel and basic corrected to input
 for ii = 1:chN
-    matlabbatch{k}.spm.util.imcalc(1).input(ii,1) = subfun_get_file(... % input must be a column vector
+    matlabbatch{1}.spm.util.imcalc(1).input(ii,1) = subfun_get_file(... % input must be a column vector
         ['tissue channel ',tissue_channels{ii}], ['^c',tissue_channels{ii},'sub\d+_anat.nii']); %#ok<AGROW>
 end; clear ii tissue_channels
 % add bias corrected image at end of input
-matlabbatch{k}.spm.util.imcalc(1).input(chN+1,1) = subfun_get_file('bias corrected anatomical image','^msub\d+_anat.nii');
-matlabbatch{k}.spm.util.imcalc(1).input = cellstr(matlabbatch{k}.spm.util.imcalc.input);
+matlabbatch{1}.spm.util.imcalc(1).input(chN+1,1) = subfun_get_file('bias corrected anatomical image','^msub\d+_anat.nii');
+matlabbatch{1}.spm.util.imcalc(1).input = cellstr(matlabbatch{k}.spm.util.imcalc.input);
 
 % new file name
 maskFile=fullfile(subxDir, [maskName,'.nii']);
@@ -42,8 +41,8 @@ maskFile=fullfile(subxDir, [maskName,'.nii']);
 if exist(maskFile,'file')==2
     delete(maskFile);
 end
-matlabbatch{k}.spm.util.imcalc.output = maskName;
-matlabbatch{k}.spm.util.imcalc.outdir = {subxDir}; % where mask file is saved to
+matlabbatch{1}.spm.util.imcalc.output = maskName;
+matlabbatch{1}.spm.util.imcalc.outdir = {subxDir}; % where mask file is saved to
 % imcalc expression
 i2sum='i1';
 if chN > 1
@@ -51,22 +50,23 @@ if chN > 1
         i2sum=strcat(i2sum,'+i',num2str(ii));
     end; clear ii
 end
-matlabbatch{k}.spm.util.imcalc.expression=sprintf('(%s).*i%d', i2sum, chN+1); clear i2sum % e.g. (i1+i2) .* i3
+matlabbatch{1}.spm.util.imcalc.expression=sprintf('(%s).*i%d', i2sum, chN+1); clear i2sum % e.g. (i1+i2) .* i3
 % other parameters
-matlabbatch{k}.spm.util.imcalc.var = struct('name', {}, 'value', {});
-matlabbatch{k}.spm.util.imcalc.options.dmtx = 0;
-matlabbatch{k}.spm.util.imcalc.options.mask = 0;
-matlabbatch{k}.spm.util.imcalc.options.interp = 7; % highest quality
-matlabbatch{k}.spm.util.imcalc.options.dtype = 4;
+matlabbatch{1}.spm.util.imcalc.var = struct('name', {}, 'value', {});
+matlabbatch{1}.spm.util.imcalc.options.dmtx = 0;
+matlabbatch{1}.spm.util.imcalc.options.mask = 0;
+matlabbatch{1}.spm.util.imcalc.options.interp = 7; % highest quality
+matlabbatch{1}.spm.util.imcalc.options.dtype = 4;
 %% normalise
-k = k+1;
-matlabbatch{k}.spm.spatial.normalise.write.subj.def(1) = subfun_get_file('forward deformation','^y_sub\d+_anat.nii');
-matlabbatch{k}.spm.spatial.normalise.write.subj.resample(1) = {fullfile(subxDir, [maskName, '.nii'])};
-matlabbatch{k}.spm.spatial.normalise.write.woptions.bb = [-78 -112 -70
+
+matlabbatch{2}.spm.spatial.normalise.write.subj.def = subfun_get_file('forward deformation','^y_sub\d+_anat.nii');
+%matlabbatch{2}.spm.spatial.normalise.write.subj.resample(1) = {fullfile(subxDir, [maskName, '.nii'])};
+matlabbatch{2}.spm.spatial.normalise.write.subj.resample(1) = cfg_dep('Image Calculator: ImCalc Computed Image: output', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{2}.spm.spatial.normalise.write.woptions.bb = [-78 -112 -70
                                                            78 76 85];
-matlabbatch{k}.spm.spatial.normalise.write.woptions.vox = norm_voxel;
-matlabbatch{k}.spm.spatial.normalise.write.woptions.interp = 7;
-matlabbatch{k}.spm.spatial.normalise.write.woptions.prefix = 'w';
+matlabbatch{2}.spm.spatial.normalise.write.woptions.vox = norm_voxel;
+matlabbatch{2}.spm.spatial.normalise.write.woptions.interp = 7;
+matlabbatch{2}.spm.spatial.normalise.write.woptions.prefix = 'w';
 
 %%--subfunction
 function cstr = subfun_get_file(filedescription, ptrn)
