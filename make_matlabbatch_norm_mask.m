@@ -61,7 +61,7 @@ matlabbatch{k}.spm.util.imcalc.options.dtype = 4;
 %% normalise
 k = k+1;
 matlabbatch{k}.spm.spatial.normalise.write.subj.def(1) = subfun_get_file('forward deformation','^y_sub\d+_anat.nii');
-matlabbatch{k}.spm.spatial.normalise.write.subj.resample(1) = {fullfile(subxDir, [maskName, '.nii])};
+matlabbatch{k}.spm.spatial.normalise.write.subj.resample(1) = {fullfile(subxDir, [maskName, '.nii'])};
 matlabbatch{k}.spm.spatial.normalise.write.woptions.bb = [-78 -112 -70
                                                            78 76 85];
 matlabbatch{k}.spm.spatial.normalise.write.woptions.vox = norm_voxel;
