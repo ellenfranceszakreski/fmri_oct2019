@@ -18,7 +18,7 @@ subxDir=['/data/scratch/zakell/fmri_oct2019/Input/',subx];
 jobs = make_matlabbatch_norm_mask(subxDir, 'Gm', 1, [3 3 3]); % resample to 3 mm voxel to match fMRI
 % output image will be Gm.nii (native space) and wGm.nii (MNI space)
 spm('defaults', 'FMRI');
-spm_jobman('run', jobs);
+ls;
 % save file in subject's directory to indicate successful job completion
 save(fullfile(subxDir,'norm_mask_Gm_done.mat'), 'jobs','-mat');
 % done
