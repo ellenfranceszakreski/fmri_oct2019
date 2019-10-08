@@ -16,8 +16,7 @@ addpath(genpath(fullfile(spm('dir'),'config')));
 subxDir=['/data/scratch/zakell/fmri_oct2019/Input/',subx];
 
 matlabbatch = {};
-matlabbatch{1}.spm.spatial.smooth.data = '<UNDEFINED>';
-matlabbatch{1}.spm.spatial.smooth.data(1) = cellstr(spm_select('ExtFPList', subxDir, ['^wausub\d+_',runx,'.nii'], 1:200));
+matlabbatch{1}.spm.spatial.smooth.data = cellstr(spm_select('ExtFPList', subxDir, ['^wausub\d+_',runx,'.nii'], 1:200));
 matlabbatch{1}.spm.spatial.smooth.fwhm = [9 9 9];
 matlabbatch{1}.spm.spatial.smooth.dtype = 0;
 matlabbatch{1}.spm.spatial.smooth.im = 0;
