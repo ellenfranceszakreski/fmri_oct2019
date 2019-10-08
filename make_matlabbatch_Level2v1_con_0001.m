@@ -69,6 +69,7 @@ matlabbatch{4}.spm.stats.fmri_est.spmmat(1) = cfg_dep('Factorial design specific
 matlabbatch{4}.spm.stats.fmri_est.write_residuals = 1;
 matlabbatch{4}.spm.stats.fmri_est.method.Classical = 1;
 %% results
+
 matlabbatch{5}.spm.stats.results.spmmat(1) = cfg_dep('Model estimation: SPM.mat File',...
     substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{5}.spm.stats.results.conspec.titlestr = '';
@@ -80,6 +81,21 @@ matlabbatch{5}.spm.stats.results.conspec.conjunction = 1;
 matlabbatch{5}.spm.stats.results.conspec.mask.none = 1;
 matlabbatch{5}.spm.stats.results.units = 1;
 matlabbatch{5}.spm.stats.results.export{1}.ps = true;
+
+%matlabbatch={};
+%matlabbatch{5}.spm.stats.results.spmmat={'/data/scratch/zakell/fmri_oct2019/Level2v1/SPM.mat'};
+%matlabbatch{5}.spm.stats.results.conspec.titlestr = 'MyResults';
+%matlabbatch{5}.spm.stats.results.conspec.contrasts = Inf;
+%matlabbatch{5}.spm.stats.results.conspec.threshdesc = 'FDR';
+%matlabbatch{5}.spm.stats.results.conspec.thresh = 0.05;
+%matlabbatch{5}.spm.stats.results.conspec.extent = 0;
+%matlabbatch{5}.spm.stats.results.conspec.conjunction = 1;
+%matlabbatch{5}.spm.stats.results.conspec.mask.none = 1;
+%matlabbatch{5}.spm.stats.results.units = 1;
+%matlabbatch{5}.spm.stats.results.export{1}.pdf = true;
+%matlabbatch = matlabbatch(5);
+%spm('defaults', 'FMRI');
+%spm_jobman('run', matlabbatch);
 
 %% DO JOB
 %spm('defaults', 'FMRI');
