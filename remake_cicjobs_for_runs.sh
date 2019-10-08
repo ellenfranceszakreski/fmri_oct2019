@@ -85,7 +85,8 @@ touch $cicjoblistFile
 # for each subject in subjects.txt
 for subx in `cat "$SubjectList"`
 do
-  for r in {1,2,3}; do
+  for r in {1,2,3}
+  do
 	  # make job file for this subject
 	  jobfile=$JobDir/$subx"_run"$r"_job.m"
 	  touch $jobfile
