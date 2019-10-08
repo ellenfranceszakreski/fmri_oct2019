@@ -7,7 +7,7 @@ function matlabbatch = make_matlabbatch_norm_mask(subxDir, maskName, tissue_chan
 % subxDir
 subxDir = char(subxDir);
 assert(exist(subxDir,'dir')==7,'Invalid subject directory\n\t%s',subxDir);
-assert(~isempty(regexp(subxDir, '/sub\d+(/)*$', once')), 'Invalid subject directory\n\t%s', subxDir);
+assert(~isempty(regexp(subxDir, '/sub\d+(/)*$', 'once')), 'Invalid subject directory\n\t%s', subxDir);
 % mask name
 maskName = char(maskName);
 assert(isvarname(maskName),'maskName must be valid matlab variable name.');
