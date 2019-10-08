@@ -29,12 +29,12 @@ matlabbatch = {};
 k = 1;
 % tissue channel and basic corrected to input
 for ii = 1:chN
-    matlabbatch{k}.spm.util.imcalc.input(ii) = subfun_get_file(...
+    matlabbatch{k}.spm.util.imcalc(1).input(ii,1) = subfun_get_file(... % input must be a column vector
         ['tissue channel ',tissue_channels{ii}], ['^c',tissue_channels{ii},'sub\d+_anat.nii']); %#ok<AGROW>
 end; clear ii tissue_channels
 % add bias corrected image at end of input
-matlabbatch{k}.spm.util.imcalc.input(chN+1) = subfun_get_file('bias corrected anatomical image','^msub\d+_anat.nii');
-matlabbatch{k}.spm.util.imcalc.input = cellstr(matlabbatch{k}.spm.util.imcalc.input);
+matlabbatch{k}.spm.util.imcalc(1).input(chN+1,1) = subfun_get_file('bias corrected anatomical image','^msub\d+_anat.nii');
+matlabbatch{k}.spm.util.imcalc(1).input = cellstr(matlabbatch{k}.spm.util.imcalc.input);
 
 % new file name
 maskFile=fullfile(subxDir, [maskName,'.nii']);
@@ -61,8 +61,7 @@ matlabbatch{k}.spm.util.imcalc.options.dtype = 4;
 %% normalise
 k = k+1;
 matlabbatch{k}.spm.spatial.normalise.write.subj.def(1) = subfun_get_file('forward deformation','^y_sub\d+_anat.nii');
-matlabbatch{k}.spm.spatial.normalise.write.subj.resample(1) = cfg_dep('Image Calculator: Imcalc Computed Image',...
-  substruct('.','val', '{}',{k-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{k}.spm.spatial.normalise.write.subj.resample(1) = {fullfile(subxDir, [maskName, '.nii])};
 matlabbatch{k}.spm.spatial.normalise.write.woptions.bb = [-78 -112 -70
                                                            78 76 85];
 matlabbatch{k}.spm.spatial.normalise.write.woptions.vox = norm_voxel;
