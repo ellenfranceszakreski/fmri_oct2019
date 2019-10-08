@@ -62,7 +62,7 @@ matlabbatch{1}.spm.util.imcalc.options.dtype = 4;
 defFile=subfun_get_file('forward deformation','^y_sub\d+_anat.nii');
 % the frame index needs to be removed from the deformation file
 defFile=regexprep(defFile,',1$','');
-matlabbatch{2}.spm.spatial.normalise.write.subj.def = defFile; clear defFile
+matlabbatch{2}.spm.spatial.normalise.write.subj.def(1) = defFile; clear defFile
 matlabbatch{2}.spm.spatial.normalise.write.subj.resample(1) = cfg_dep('Image Calculator: ImCalc Computed Image: output', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{2}.spm.spatial.normalise.write.woptions.bb = [-78 -112 -70
                                                            78 76 85];
