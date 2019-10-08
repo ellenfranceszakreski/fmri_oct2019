@@ -87,7 +87,7 @@ for subx in `cat "$SubjectList"`
 do
   for r in {1,2,3}; do
 	  # make job file for this subject
-	  jobfile=$JobDir/$subx"_run"$r_"job.m"
+	  jobfile=$JobDir/$subx"_run"$r"_job.m"
 	  touch $jobfile
 	  # prepend code setting variable "subx" to this subject
 	  echo "subx = '"$subx"';" > $jobfile # note subject names are character vectors (e.g. 'sub2', 'sub10', etc.)
