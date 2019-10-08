@@ -1,4 +1,5 @@
-function make_matlabbatch_Level2v1(con_000x);
+function make_matlabbatch_Level2v1(con_000x)
+% con_000x = 'con_0001 (-control+stress), con_0002 (+stress-control)
 AnalysisDir='/data/scratch/zakell/fmri_oct2019';
 con_000x=validatestring(con_000x,{'con_0001','con_0002'});
 Level2Dir=[AnalysisDir,'/Level2v1'];
