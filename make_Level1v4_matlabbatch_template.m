@@ -1,5 +1,4 @@
-% make_Level1v4_matlabbatch_for_subx make a matlabbatch cell array for level1 model specification and estimation
-% e.g. [matlabbatch, spmDir] = make_Level1_matlabbatch_for_subx('sub2');
+% make_Level1v4_matlabbatch_template.m make a matlabbatch cell array for level1 model specification and estimation
 % requires variable subx be defined e.g. subx='sub2';
 
 AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <-make sure this correct!
