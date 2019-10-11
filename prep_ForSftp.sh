@@ -19,6 +19,7 @@ do
 GZIP=-9 tar -czvf $ForSftpDir/$subx".tar.gz" \
 Input/$subx/s09wausub*.nii \
 Input/$subx/wGm.nii \
+Input/$subx/wBrain.nii \
 Input/$subx/rp_*.txt \
 Input/$subx/SPM.mat \
 Input/$subx/con_*.nii \
