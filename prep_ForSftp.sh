@@ -22,6 +22,7 @@ Input/$subx/wGm.nii \
 Input/$subx/rp_*.txt \
 Input/$subx/SPM.mat \
 Input/$subx/con_*.nii \
+Input/$subx/spm*_*.nii \
 Input/$subx/beta_* \
 Input/$subx/RPV.nii \
 Input/$subx/ResMS.nii
