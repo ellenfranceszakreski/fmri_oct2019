@@ -18,10 +18,15 @@ matlabbatch{x}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{x}.spm.stats.fmri_spec.timing.RT = 2.552;
 matlabbatch{x}.spm.stats.fmri_spec.timing.fmri_t = 44;
 matlabbatch{x}.spm.stats.fmri_spec.timing.fmri_t0 = 22; % reference slice from slice time correction
-nRun=3;
+if strcmp(subx,'sub28)
+    runxs = {'run2','run3'};
+else
+    runxs = {'run1','run2','run3'};
+end
+nRun=numel(runxs);
 control_stress = {'control','stress'};
 for r=1:nRun
-    subx_runx = [subx,'_run',num2str(r)];
+    subx_runx = [subx,'_run',runxs{r}];
     % load dataset for conditions and regressors
     ds = importdata([AnalysisDir,'/Data/dataset_',subx_runx,'.mat']);
     
