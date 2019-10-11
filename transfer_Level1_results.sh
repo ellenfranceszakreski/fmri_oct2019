@@ -19,13 +19,14 @@ InitialDir=$(pwd)
 cd $AnalysisDir/Input
 for subx in sub*
 do
-	mkdir $Level1Dir/subx
-	mv -v $subx/beta_*.nii $Level1Dir/subx
-	mv -v $subx/con_*.nii $Level1Dir/subx
-	mv -v $subx/spm*_*.nii $Level1Dir/subx # spmT_ spmF_
-	mv -v $subx/mask.nii $Level1Dir/subx
-	mv -v $subx/Res*.nii $Level1Dir/subx # e.g. Res_0100.nii ResMS.nii
-	mv -v $subx/RPV.nii $Level1Dir/subx
+	mkdir $Level1Dir/$subx
+	mv -v $subx/beta_*.nii $Level1Dir/$subx
+	mv -v $subx/con_*.nii $Level1Dir/$subx
+	mv -v $subx/spm*_*.nii $Level1Dir/$subx # spmT_ spmF_
+	mv -v $subx/mask.nii $Level1Dir/$subx
+	mv -v $subx/Res*.nii $Level1Dir/$subx # e.g. Res_0100.nii ResMS.nii
+	mv -v $subx/RPV.nii $Level1Dir/$subx
+	mv -v $subx/SPM.mat $Level1Dir/$subx
 done
 
 echo "Done moving files"
