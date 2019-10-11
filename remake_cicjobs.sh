@@ -109,4 +109,6 @@ echo `cat $cicjoblistFile | wc -l`" jobs were made"
 ## done
 echo "done making cic jobs, cic job list and test cic job list. See "$JobDir
 unset template_file cicjob_list JobDir AnalysisDir JobName SubjectList
+
+exit 0
 ####
