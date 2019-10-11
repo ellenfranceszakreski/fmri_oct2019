@@ -5,7 +5,7 @@ AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <- MAKE SURE THIS IS CORRECT!
 addpath(genpath(fullfile(spm('dir'),'config')));
 
 matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.name = 'subx dir';
-matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.dirs = {{fullfile(AnalysisDir,'Input/sub28')}};
+matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.dirs = {'<UNDEFINED>'}; %{{fullfile(AnalysisDir,'Input/sub28')}};
 % no RUN 1
 %% find run 2 smoothed iamges
 matlabbatch{2}.cfg_basicio.file_dir.file_ops.file_fplist.dir(1) = cfg_dep('Named Directory Selector: subx dir(1)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','dirs', '{}',{1}));
@@ -123,9 +123,5 @@ matlabbatch{12}.spm.stats.con.consess{2}.tcon.weights = [0.5 -0.5]; %movement pa
 matlabbatch{12}.spm.stats.con.consess{2}.tcon.sessrep = 'replsc';
 matlabbatch{12}.spm.stats.con.delete = 1;
 %------------------
-%%% run
-spm('defaults', 'FMRI');
-spm_jobman('run', matlabbatch);
-%% DONE
 
 
