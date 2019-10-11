@@ -1,8 +1,8 @@
 % Level1v2_job_sub28.m
 % level 1 specification, estimation, contrast creation (-control+stress, +control-stress)
 % 1 dependency (subject's input directory)
-AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <- MAKE SURE THIS IS CORRECT!
-addpath(genpath(fullfile(spm('dir'),'config')));
+%AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <- MAKE SURE THIS IS CORRECT!
+%addpath(genpath(fullfile(spm('dir'),'config')));
 
 matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.name = 'subx dir';
 matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_named_dir.dirs = {'<UNDEFINED>'}; %{{fullfile(AnalysisDir,'Input/sub28')}};
