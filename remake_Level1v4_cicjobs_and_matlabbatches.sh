@@ -42,6 +42,7 @@ do
   echo "subx = '"$subx"';" > $subxmatlabbatchFile
   # add code to job .m file (same for all subjects)
   cat $matlabbatchTemplateFile >> $subxmatlabbatchFile
+  echo "done "$subxmatlabbatchFile
   unset subx subxmatlabbatchFile
 done
 # return to original directory
