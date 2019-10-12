@@ -8,7 +8,9 @@ OriginalDir=$(pwd)
 AnalysisDir=/data/scratch/zakell/fmri_oct2019 # <-make sure this is correct
 ForSftpDir=$AnalysisDir/ForSftp
 if [ -d $ForSftpDir ]; then
-	echo "error: sftp dir already exists!"
+	echo "error: sftp dir already exists! Delete this directory first"
+	echo "rm -r "$ForSftpDir
+	echo "."$AnalysisDir"/Scripts/prep_ForSftp.sh"
 	exit 1
 fi
 mkdir $ForSftpDir
@@ -17,16 +19,19 @@ cd $AnalysisDir
 for subx in `cat $AnalysisDir/Scripts/subjects.txt`
 do
 GZIP=-9 tar -czvf $ForSftpDir/$subx".tar.gz" \
-Input/$subx/s09wausub*.nii \
-Input/$subx/wGm.nii \
-Input/$subx/wBrain.nii \
-Input/$subx/rp_*.txt \
-Input/$subx/SPM.mat \
 Input/$subx/con_*.nii \
 Input/$subx/spm*_*.nii \
-Input/$subx/beta_* \
-Input/$subx/RPV.nii \
-Input/$subx/ResMS.nii
+
+#Input/$subx/s09wausub*.nii \
+#Input/$subx/wGm.nii \
+#Input/$subx/wBrain.nii \
+#Input/$subx/rp_*.txt \
+#Input/$subx/SPM.mat \
+#Input/$subx/con_*.nii \
+#Input/$subx/spm*_*.nii \
+#Input/$subx/beta_* \
+#Input/$subx/RPV.nii \
+#Input/$subx/ResMS.nii
 
 done
 unset subx
