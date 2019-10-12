@@ -13,13 +13,15 @@ matlabbatch{x}.spm.stats.fmri_spec.timing.fmri_t = 44;
 matlabbatch{x}.spm.stats.fmri_spec.timing.fmri_t0 = 22; % reference slice from slice time correction
 if strcmp(subx,'sub28')
     runxs = {'run2','run3'};
+elseif ismember(subx, {'sub21','sub22'})
+    error('sub21 and sub22 have no mist data')
 else
     runxs = {'run1','run2','run3'};
 end
 nRun=numel(runxs);
 control_stress = {'control','stress'};
 for r=1:nRun
-    subx_runx = [subx,'_run',runxs{r}];
+    subx_runx = [subx,'_',runxs{r}];
     % load dataset for conditions and regressors
     ds = importdata([AnalysisDir,'/Data/dataset_',subx_runx,'.mat']);
     matlabbatch{x}.spm.stats.fmri_spec.sess(r).scans = cellstr(...
