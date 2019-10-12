@@ -32,7 +32,7 @@ unset status
 # make matlabbatches in cicjobs dir
 
 cd cicjobs/Level1v4
-for subx_job in subx*_job.m
+for subx_job in sub*_job.m
 do
   subx=`echo $subx_job | sed -e 's/_job.m//g'`
   subxmatlabbatchFile=$subx"_matlabbatch.m"
