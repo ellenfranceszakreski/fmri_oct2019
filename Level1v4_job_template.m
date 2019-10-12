@@ -19,10 +19,10 @@ addpath(genpath([spm('dir'),'/config']));
 
 % List of open inputs
 % Named Directory Selector: Directory - cfg_files
-jobs = {[AnalysisDir,'/Scripts/Level1v2_job.m']};
-inputs{1, 1} = {[AnalysisDir,'/Input/',subx]}; % Named Directory Selector: Directory - cfg_files
+jobs = {[AnalysisDir,'/cicjobs/Level1v4/',subx,'_matlabbatch.m']}; # made byremake_Level1v4_cicjobs_and_matlabbatches
+
 spm('defaults', 'FMRI');
-spm_jobman('run', jobs, inputs{:});
+spm_jobman('run', jobs);
 % job complete
-save([AnalysisDir,'/Input/',subx,'/Level1v2_job_done.mat'], 'jobs');
+save([AnalysisDir,'/Input/',subx,'/Level1v4_job_done.mat'], 'jobs');
 %% done
