@@ -34,7 +34,7 @@ unset status
 cd cicjobs/Level1v4
 for subx_job in subx*_job.m
 do
-  subx=`echo $subx_job | grep -o sub[0-9]\+`
+  subx=`echo $subx_job | sed -e 's/_job.m//g'`
   subxmatlabbatchFile=$subx"_matlabbatch.m"
   test -f $subxmatlabbatchFile && rm $subxmatlabbatchFile
   touch $subxmatlabbatchFile
