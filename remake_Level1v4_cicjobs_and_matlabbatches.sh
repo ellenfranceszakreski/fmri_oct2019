@@ -9,10 +9,10 @@ if [ ! -f $matlabbatchTemplateFile ]; then
   exit 1
 fi
 
-if [ "$#" -eq 1]; then
+if [ "$#" -eq 1 ]; then
   ./$AnalysisDir/Scripts/remake_cicjobs Level1v4 $1 # provided optional subject list
   status=$? #exit status
-elif [ "$#" -eq 0]; then
+elif [ "$#" -eq 0 ]; then
   ./$AnalysisDir/Scripts/remake_cicjobs Level1v4
   status=$? #exit status
 else
