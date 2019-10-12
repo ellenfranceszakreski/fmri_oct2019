@@ -75,5 +75,7 @@ matlabbatch{x}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification:
     substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{x}.spm.stats.fmri_est.write_residuals = 1;
 matlabbatch{x}.spm.stats.fmri_est.method.Classical = 1;
+##
+clear ds control_stress ppPrefix
 
 
