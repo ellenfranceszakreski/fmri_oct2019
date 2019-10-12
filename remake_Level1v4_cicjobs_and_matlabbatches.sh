@@ -10,10 +10,10 @@ if [ ! -f $matlabbatchTemplateFile ]; then
 fi
 
 if [ "$#" -eq 1 ]; then
-  ./$AnalysisDir/Scripts/remake_cicjobs.sh Level1v4 $1 # provided optional subject list
+  .$AnalysisDir/Scripts/remake_cicjobs.sh Level1v4 $1 # provided optional subject list
   status=$? #exit status
 elif [ "$#" -eq 0 ]; then
-  ./$AnalysisDir/Scripts/remake_cicjobs.sh Level1v4
+  .$AnalysisDir/Scripts/remake_cicjobs.sh Level1v4
   status=$? #exit status
 else
   echo "error: incorrect number of inputs"
