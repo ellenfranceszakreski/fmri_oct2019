@@ -1,8 +1,9 @@
 %function make_matlabbatch_Level2v1(con_000x)
 % con_000x = 'con_0001 (-control+stress), con_0002 (+stress-control)
+% define variables con_000x='con_0001' and Level2Name='Level2v1';
 AnalysisDir='/data/scratch/zakell/fmri_oct2019';
 con_000x='con_0001'
-Level2Dir=[AnalysisDir,'/Level2v1'];
+Level2Dir=[AnalysisDir,'/',Level2Name];
 if exist(Level2Dir,'dir')~=7
     mkdir(Level2Dir)
 end
