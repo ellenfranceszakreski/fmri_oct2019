@@ -46,6 +46,6 @@ do
 done
 # return to original directory
 cd "$InitialDir"
-echo "Done making required job .m files and matlabbatch files.
+echo "Done making required job .m files and matlabbatch files."
 ### DONE
 exit 0
