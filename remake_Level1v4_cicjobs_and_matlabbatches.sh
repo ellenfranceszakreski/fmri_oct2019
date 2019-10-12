@@ -8,12 +8,15 @@ if [ ! -f $matlabbatchTemplateFile ]; then
   echo "error: could not find "$matlabbatchTemplateFile
   exit 1
 fi
+# temporarily go to cicjobs/Level1v4 
+InitialDir=$(pwd)
+cd $AnalysisDir
 
 if [ "$#" -eq 1 ]; then
-  .$AnalysisDir/Scripts/remake_cicjobs.sh Level1v4 $1 # provided optional subject list
+  ./Scripts/remake_cicjobs.sh Level1v4 $1 # provided optional subject list
   status=$? #exit status
 elif [ "$#" -eq 0 ]; then
-  .$AnalysisDir/Scripts/remake_cicjobs.sh Level1v4
+  ./Scripts/remake_cicjobs.sh Level1v4
   status=$? #exit status
 else
   echo "error: incorrect number of inputs"
@@ -22,14 +25,13 @@ fi
 # get exit status for remake_cicjobs
 if [ $status -ne 0 ]; then
   echo "error: failed to make job list"
+  cd "$InitialDir"
   exit 3
 fi
 unset status
 # make matlabbatches in cicjobs dir
-# temporarily go to cicjobs/Level1v4 
-InitialDir=$(pwd)
-cd $AnalysisDir/cicjobs/Level1v4
 
+cd cicjobs/Level1v4
 for subx_job in subx*_job.m
 do
   subx=`echo $subx_job | grep -o sub[0-9]\+`
