@@ -2,7 +2,7 @@
 % requires variable subx be defined e.g. subx='sub2';
 
 AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <-make sure this correct!
-addpath(genpath(fullfile(spm('dir'),'config'));
+addpath(genpath(fullfile(spm('dir'),'config')));
 ppPrefix = 's09wau';
 matlabbatch = {};
 x = 1;
