@@ -23,7 +23,7 @@ test -f $Level1vx_job_template && rm $Level1vx_job_template
 touch $Level1vx_job_template 
 # add code
 echo "% append this code after defining variable subx, e.g. subx='sub2';" > $Level1vx_job_template 
-printf "AnalysisDir = \'"$AnalysisDir"\';\n" >> $Level1vx_job_template
+printf "AnalysisDir = '"$AnalysisDir"';\n" >> $Level1vx_job_template
 echo "%% set up cluster" >> $Level1vx_job_template
 echo "number_of_cores=12;" >> $Level1vx_job_template
 echo "d=tempname();% get temporary directory location" >> $Level1vx_job_template
