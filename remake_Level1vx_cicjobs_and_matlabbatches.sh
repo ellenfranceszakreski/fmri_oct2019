@@ -36,11 +36,11 @@ echo "addpath([AnalysisDir,'/Scripts']);" >> $Level1vx_job_template
 echo "addpath(genpath([spm('dir'),'/config']));" >> $Level1vx_job_template
 echo "% made byremake_Level1v4_cicjobs_and_matlabbatches" >> $Level1vx_job_template
 
-printf "jobs = {[AnalysisDir,\'/cicjobs/%s/\',subx,'_matlabbatch.m']};\n" $Level1vx >> $Level1vx_job_template
+printf "jobs = {[AnalysisDir,'/cicjobs/%s/',subx,'_matlabbatch.m']};\n" $Level1vx >> $Level1vx_job_template
 echo "spm('defaults', 'FMRI');" >> $Level1vx_job_template
 echo "spm_jobman('run', jobs);" >> $Level1vx_job_template
 echo "% job complete" >> $Level1vx_job_template
-printf "save([AnalysisDir,\'/Input/\',subx,\'/%s_job_done.mat\'], \'jobs\');\n" $Level1vx >> $Level1vx_job_template
+printf "save([AnalysisDir,'/Input/',subx,'/%s_job_done.mat'], 'jobs');\n" $Level1vx >> $Level1vx_job_template
 echo "% done" >> $Level1vx_job_template
 
 printf "\n\nDone making template file: %s\n----------------------------\n" "$Level1vx_job_template"
