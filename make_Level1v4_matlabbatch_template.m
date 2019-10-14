@@ -55,7 +55,7 @@ for r=1:nRun
     matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress = struct('name', {}, 'val', {});
     
     %     matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).name = 'difficulty';
-    %     matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).val = ds.difficulty(strcmp(ds.event,'DetectedScan'));
+    %     matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).val = ds.difficulty(strcmp(ds.event,'ExpectedScan'));
     
     clear ds
     % add movement parameters as regressors
