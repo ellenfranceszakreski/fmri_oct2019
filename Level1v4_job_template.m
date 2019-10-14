@@ -19,7 +19,7 @@ addpath(genpath([spm('dir'),'/config']));
 
 % List of open inputs
 % Named Directory Selector: Directory - cfg_files
-jobs = {[AnalysisDir,'/cicjobs/Level1v4/',subx,'_matlabbatch.m']}; # made byremake_Level1v4_cicjobs_and_matlabbatches
+jobs = {[AnalysisDir,'/cicjobs/Level1v4/',subx,'_matlabbatch.m']}; % made byremake_Level1v4_cicjobs_and_matlabbatches
 
 spm('defaults', 'FMRI');
 spm_jobman('run', jobs);
