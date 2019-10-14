@@ -76,7 +76,7 @@ for r=1:nRun
     % matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress = struct('name', {}, 'val', {});
     
     matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).name = 'difficulty';
-    matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).val = ds.difficulty(strcmp(ds.event,'DetectedScan'));
+    matlabbatch{x}.spm.stats.fmri_spec.sess(r).regress(1).val = ds.difficulty(strcmp(ds.event,'ExpectedScan'));
     
     clear ds
     % add movement parameters as regressors
@@ -86,8 +86,10 @@ end % done each session
 % done runs
 % remove sessions with bad runs
 if any(RunsMissingEvents)
+    assert(~all(RunsMissingEvents),'No runs have all the events.');
     matlabbatch{x}.spm.stats.fmri_spec.sess = matlabbatch{x}.spm.stats.fmri_spec.sess(~RunsMissingEvents);
 end
+clear RunsMissingEvents
 matlabbatch{x}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
 matlabbatch{x}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0]; % no temporal dirative or dispersion
 matlabbatch{x}.spm.stats.fmri_spec.volt = 1;
