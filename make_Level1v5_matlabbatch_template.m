@@ -1,11 +1,15 @@
 % make_Level1v5_matlabbatch_template.m make a matlabbatch cell array for level1 model specification and estimation
 % requires variable subx be defined e.g. subx='sub2';
 
+
 AnalysisDir='/data/scratch/zakell/fmri_oct2019'; % <-make sure this correct!
 addpath(genpath(fullfile(spm('dir'),'config')));
 ppPrefix = 's09wau';
 matlabbatch = {};
 x = 1;
+% change dir to Input/subx
+matlabbatch{x}.cfg_basicio.file_dir.dir_ops.cfg_cd.dir = {fullfile(AnalysisDir,'Input',subx)};
+x = x + 1;
 matlabbatch{x}.spm.stats.fmri_spec.dir = {fullfile(AnalysisDir,'Input',subx)};
 matlabbatch{x}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{x}.spm.stats.fmri_spec.timing.RT = 2.552;
@@ -99,11 +103,18 @@ matlabbatch{x}.spm.stats.fmri_spec.mask = cellstr(...
         spm_select('ExtFPList', fullfile(AnalysisDir,'Input',subx), '^wBrain.nii', Inf )...
         );
 matlabbatch{x}.spm.stats.fmri_spec.cvi = 'AR(1)';
+%% print results
+x = x+1;
+matlabbatch{x}.spm.stats.review.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
+substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{x}.spm.stats.review.display.matrix = 1;
+matlabbatch{x}.spm.stats.review.print = 'ps';
 %% model estimation
 x = x+1;
 matlabbatch{x}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
-    substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+    substruct('.','val', '{}',{x-2}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{x}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{x}.spm.stats.fmri_est.method.Classical = 1;
+
 
 clear ds control_stress ppPrefix
