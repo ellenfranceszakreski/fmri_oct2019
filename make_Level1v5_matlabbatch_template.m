@@ -108,13 +108,14 @@ x = x+1;
 matlabbatch{x}.spm.stats.review.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
 substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{x}.spm.stats.review.display.matrix = 1;
-matlabbatch{x}.spm.stats.review.print = 'ps';
+matlabbatch{x}.spm.stats.review.print = 'ps'; % eps would be better?
 %% model estimation
 x = x+1;
 matlabbatch{x}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
     substruct('.','val', '{}',{x-2}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{x}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{x}.spm.stats.fmri_est.method.Classical = 1;
+
 
 
 clear ds control_stress ppPrefix
