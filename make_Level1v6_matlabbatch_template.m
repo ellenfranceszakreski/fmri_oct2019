@@ -27,7 +27,7 @@ deptbl.rep = [1;2];
 deptbl.FrameInd= {25:70; 94:139}; % first:last frame of the 1st and 2nd stress conditions (46 frames each) 
 
 deptbl = repmat(deptbl,runN,1); % repeat for each run
-deptbl.runx = sort(runxs);
+deptbl.runx = sort(repmat(runxs, 2, 1));
 deptbl.matlabbatch_fileselector_dep = NaN(runN*2, 1);  %index of matlabbatch file select (filled later)
 deptbl.ds = cell(runN*2,1); % for cell array of datasets for stress rep1 and stress rep2 respectively
 deptbl.bad = false(runN*2,1); %if its missing a condition
@@ -60,7 +60,7 @@ for r=1:runN
     %% add rp_ movement parameters (6 column matrix)
     % varnames: rp_1, rp_2, rp_3, ... rp_6
     ExpectedScanInd=strcmp(ds.event,'ExpectedScan'); %used for adding file name and rp_
-    rp_mat = importdata(['rp_',subx_runx,'.txt'],'-ascii');
+    rp_mat = importdata([subxDir,'/rp_',subx_runx,'.txt']);
     
     assert(size(rp_mat,1)==sum(ExpectedScanInd),'ExpectedScanInd and rows in rp_%s don'' match', subx_runx);
     for w=1:6
@@ -71,7 +71,7 @@ for r=1:runN
     clear rp_w w rp_mat ExpectedScanInd
     
     %% select only stress blocks
-    ds = ds(strcmp(ds.condition,'stress'),:); clear H
+    ds = ds(strcmp(ds.condition,'stress'),:);
     H=size(ds,1); % height changed
    
     %% CALCULATE onset_stress_rep (onset relative to beginning of each stress rep)
@@ -83,7 +83,7 @@ for r=1:runN
     end
     clear subds ds rep H subx_runx
 end
-unset r
+clear r
 
 %% ======== now make matlabbatch ======== %% 
 
