@@ -1,3 +1,5 @@
+% make_Level1v6_matlabbatch_template.m
+% define subx e.g. subx='sub3';
 fprintf('subx = %s\n',subx);
 feedbacks = {'correct','incorrect','timeout'};
 
