@@ -37,6 +37,7 @@ for r=1:runN
     %% mist data
     ds = importdata(fullfile(AnalysisDir,'Data',['dataset_',subx_runx,'.mat']));
     H = size(ds,1);
+    ds.runx = repmat(runxs(r),H,1);
 
     %% determine condition
     ds.condition=cell(H,1);
@@ -79,9 +80,10 @@ for r=1:runN
     for rep=1:2
         subds=ds(ds.rep==rep,:);
         subds.onset_stress_rep = subds.onset-nanmin(subds.onset);
-        deptbl.ds{rep} = subds;
+        deptbl_ii = deptbl.rep == rep & strcmp(deptbl.runx, runxs{r});
+        deptbl.ds{deptbl_ii} = subds;
     end
-    clear subds ds rep H subx_runx
+    clear subds ds rep H subx_runx deptbl_ii
 end
 clear r
 
