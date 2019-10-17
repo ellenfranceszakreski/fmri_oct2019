@@ -13,11 +13,11 @@ subxDir=fullfile(AnalysisDir,'Input',subx);
 %% determine runxs
 switch subx
     case {'sub28','sub1'}
-        runxs={'run2','run3'};
+        runxs={'run2';'run3'};
     case {'sub35','sub21','sub22'}
         error('This subjects cannot be used b/c they don''t have mist data or did not do task.');
     otherwise
-        runxs={'run1','run2','run3'};
+        runxs={'run1';'run2';'run3'};
 end
 runN=numel(runxs);
 runxs=reshape(runxs,runN,1);% make runxs cellstring a column vector
