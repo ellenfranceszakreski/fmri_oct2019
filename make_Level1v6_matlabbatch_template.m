@@ -156,11 +156,38 @@ for r=1:size(deptbl,1)
     clear rep_run_ds
     matlabbatch{x}.spm.stats.fmri_spec.sess(r).hpf = 128;
 end
+% remove bad sessions
+if any(deptbl.bad)
+    assert(~all(deptbl.bad),'efz:NoValidSessions','%s has not valid sessions due to missing events.', subx);
+    matlabbatch{x}.spm.stats.fmri_spec.sess(~deptbl.bad);
+end
+nGoodSessions=sum(~deptbl.bad);
+clear deptbl
 
 matlabbatch{x}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
-matlabbatch{x}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0];
+matlabbatch{x}.spm.stats.fmri_spec.bases.hrf.derivs = [1 0]; % temporal derivative
 matlabbatch{x}.spm.stats.fmri_spec.volt = 1;
 matlabbatch{x}.spm.stats.fmri_spec.global = 'None';
 matlabbatch{x}.spm.stats.fmri_spec.mthresh = 0.8;
 matlabbatch{x}.spm.stats.fmri_spec.mask = cellstr(spm_select('ExtFPList',subxDir,'wBrain.nii',1)); %ICV mask
 matlabbatch{x}.spm.stats.fmri_spec.cvi = 'AR(1)';
+
+%% model estimation
+x = x+1;
+matlabbatch{x}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File',...
+    substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{x}.spm.stats.fmri_est.write_residuals = 0;
+matlabbatch{x}.spm.stats.fmri_est.method.Classical = 1;
+
+x = x+1;
+%% contrast manager
+matlabbatch{x}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File',...
+    substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{x}.spm.stats.con.consess{1}.tcon.name = '-correct+incorrect';
+matlabbatch{x}.spm.stats.con.consess{1}.tcon.weights = [-1,+1,0]./nGoodSessions; %movement parameters are 0 padded
+matlabbatch{x}.spm.stats.con.consess{1}.tcon.sessrep = 'replsc';
+matlabbatch{x}.spm.stats.con.consess{2}.tcon.name = '+correct-incorrect';
+matlabbatch{x}.spm.stats.con.consess{2}.tcon.weights = [+1,-1,0]./nGoodSessions; %movement parameters are 0 padded
+matlabbatch{x}.spm.stats.con.consess{2}.tcon.sessrep = 'replsc';
+matlabbatch{x}.spm.stats.con.delete = 1;
+clear nGoodSessions
