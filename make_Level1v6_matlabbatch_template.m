@@ -100,8 +100,8 @@ for r=1:size(deptbl,1)
     runx = deptbl.runx{r};
     x=x+1; % new matlabbatch
     deptbl.matlabbatch_fileselector_dep(r) = x;
-    matlabbatch{x}.spm.util.exp_frames.files = cellstr(...
-        spm_select('ExtFPList',subxDir,['^s09wausub\d+_',runx,'.nii'],1:200));
+    matlabbatch{x}.spm.util.exp_frames.files = {fullfile(subxDir,['s09wau',subx,'_',runx,'.nii'])};
+    % cellstr(spm_select('ExtFPList',subxDir,['^s09wausub\d+_',runx,'.nii'],1:200)); <-don't use this because it will expand each image
     %% index of frames for stress rep (whatever)
     matlabbatch{x}.spm.util.exp_frames.frames =deptbl.FrameInd{r};   
 end
@@ -122,7 +122,6 @@ for r=1:size(deptbl,1)
         substruct('.','val', '{}',{deptbl.matlabbatch_fileselector_dep(r)},...
         '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
     rep_run_ds = deptbl.ds{r};
-    run_index = deptbl.run_index(r);
     %----- for each condition in feedback
     for c=1:numel(feedbacks)
         feedback=feedbacks{c};
@@ -181,8 +180,8 @@ matlabbatch{x}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification:
 matlabbatch{x}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{x}.spm.stats.fmri_est.method.Classical = 1;
 
-x = x+1;
 %% contrast manager
+x = x+1;
 matlabbatch{x}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File',...
     substruct('.','val', '{}',{x-1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{x}.spm.stats.con.consess{1}.tcon.name = '-correct+incorrect';
