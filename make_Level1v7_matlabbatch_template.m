@@ -10,7 +10,8 @@ switch subx
         runxs = {'run1','run2','run3'};
 end
 runN=numel(runxs);
-matlabbatch{1}.spm.stats.fmri_spec.dir = {fullfile(AnalysisDir,'Input',subx)};
+subxDir = fullfile(AnalysisDir,'Input',subx);
+matlabbatch{1}.spm.stats.fmri_spec.dir = {subxDir};
 matlabbatch{1}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{1}.spm.stats.fmri_spec.timing.RT = 2.552;
 matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t = 44;
@@ -19,6 +20,9 @@ matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t0 = 22;
 conditions = {'control','stress'};
 for r=1:runN
     runx=runxs{r};
+    % scans
+    matlabbatch{1}.spm.stats.fmri_spec.sess(r).scans = cellstr(...
+        spm_select('ExtFPList', subxDir, ['s09wausub\d+_',runx,'.nii'], 1:139));
     % load data
     ds = importdata(fullfile(AnalysisDir,'Data',...
         strcat('dataset_',subx,'_',runx,'.mat')));
