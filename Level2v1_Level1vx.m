@@ -71,29 +71,42 @@ matlabbatch{3}.spm.stats.factorial_design.masking.em = {''};
 matlabbatch{3}.spm.stats.factorial_design.globalc.g_omit = 1;
 matlabbatch{3}.spm.stats.factorial_design.globalm.gmsca.gmsca_no = 1;
 matlabbatch{3}.spm.stats.factorial_design.globalm.glonorm = 1;
-%% estimate
-matlabbatch{4}.spm.stats.fmri_est.spmmat(1) = cfg_dep('Factorial design specification: SPM.mat File',...
-    substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
-matlabbatch{4}.spm.stats.fmri_est.write_residuals = 1;
-matlabbatch{4}.spm.stats.fmri_est.method.Classical = 1;
-%% results
 
-matlabbatch{5}.spm.stats.results.spmmat(1) = cfg_dep('Model estimation: SPM.mat File',...
-    substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
-matlabbatch{5}.spm.stats.results.conspec.titlestr = '';
-matlabbatch{5}.spm.stats.results.conspec.contrasts = Inf;
-matlabbatch{5}.spm.stats.results.conspec.threshdesc = 'FDR';
-matlabbatch{5}.spm.stats.results.conspec.thresh = 0.05;
-matlabbatch{5}.spm.stats.results.conspec.extent = 0;
-matlabbatch{5}.spm.stats.results.conspec.conjunction = 1;
-matlabbatch{5}.spm.stats.results.conspec.mask.none = 1;
-matlabbatch{5}.spm.stats.results.units = 1;
-matlabbatch{5}.spm.stats.results.export{1}.ps = true;
 
-%exclude results
-matlabbatch=matlabbatch(1:4);
+% estimate
+fprintf('%%% FOR ESTIMATION %%%')
+fprintf('matlabbatch = {};\n')
+fprintf('matlabbatch{1}.spm.stats.fmri_est.spmmat(1)= {%s};\n',fullfile(Level2Dir,'SPM.mat'));
+fprintf('matlabbatch{1}.spm.stats.fmri_est.write_residuals = 0;');
+fprintf('matlabbatch{1}.spm.stats.fmri_est.method.Classical = 1;');
+fprintf('spm(''defaults'',''FMRI'')\n');
+fprintf('spm_jobman(''run'', matlabbatch)\n');
+% run
 spm('defaults','FMRI');
 spm_jobman('run',matlabbatch);
+%% estimate
+%matlabbatch{4}.spm.stats.fmri_est.spmmat(1) = cfg_dep('Factorial design specification: SPM.mat File',...
+ %   substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+%matlabbatch{4}.spm.stats.fmri_est.write_residuals = 1;
+%matlabbatch{4}.spm.stats.fmri_est.method.Classical = 1;
+%% results
+
+%matlabbatch{5}.spm.stats.results.spmmat(1) = cfg_dep('Model estimation: SPM.mat File',...
+%    substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+%matlabbatch{5}.spm.stats.results.conspec.titlestr = '';
+%matlabbatch{5}.spm.stats.results.conspec.contrasts = Inf;
+%matlabbatch{5}.spm.stats.results.conspec.threshdesc = 'FDR';
+%matlabbatch{5}.spm.stats.results.conspec.thresh = 0.05;
+%matlabbatch{5}.spm.stats.results.conspec.extent = 0;
+%matlabbatch{5}.spm.stats.results.conspec.conjunction = 1;
+%matlabbatch{5}.spm.stats.results.conspec.mask.none = 1;
+%matlabbatch{5}.spm.stats.results.units = 1;
+%matlabbatch{5}.spm.stats.results.export{1}.ps = true;
+
+% %exclude results
+% matlabbatch=matlabbatch(1:4);
+% spm('defaults','FMRI');
+% spm_jobman('run',matlabbatch);
 
 
 end
