@@ -65,7 +65,7 @@ matlabbatch{1}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0];
 matlabbatch{1}.spm.stats.fmri_spec.volt = 1;
 matlabbatch{1}.spm.stats.fmri_spec.global = 'None';
 matlabbatch{1}.spm.stats.fmri_spec.mthresh = 0.8;
-matlabbatch{1}.spm.stats.fmri_spec.mask = {''};
+matlabbatch{1}.spm.stats.fmri_spec.mask = {fullfile(subxDir, 'wBrain.nii')};
 matlabbatch{1}.spm.stats.fmri_spec.cvi = 'AR(1)';
 
 %% model estimation
