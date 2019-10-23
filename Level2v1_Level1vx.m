@@ -1,8 +1,14 @@
+function Level2v1_Level1vx(Level1Name, con_000x)
+% Level2v1_Level1vx Level2v1_Level1vx(Level1Name, con_000x)
+% e.g. Level2v1_Level1vx('Level1v6', 'con_0001')
 addpath(genpath([spm('dir'),'/config']));
 AnalysisDir='/data/scratch/zakell/fmri_oct2019';
-Level2Name='Level2v1_Level1v6;
-Level1Name= 'Level1v6;
+
+Level1Name= 'Level1v6';
 con_000x='con_0001'
+
+Level2Name=strcat('Level2v1_',Level1Name,'_',con_000x);
+
 Level2Dir=[AnalysisDir,'/',Level2Name];
 if exist(Level2Dir,'dir')~=7
     mkdir(Level2Dir)
