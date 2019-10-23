@@ -74,3 +74,13 @@ matlabbatch{2}.spm.stats.fmri_est.spmmat(1) = cfg_dep(...
     substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{2}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{2}.spm.stats.fmri_est.method.Classical = 1;
+
+%% contrast manager
+matlabbatch{3}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{3}.spm.stats.con.consess{1}.tcon.name = '-control+stress';
+matlabbatch{3}.spm.stats.con.consess{1}.tcon.weights = [-1, +1]./runN;
+matlabbatch{3}.spm.stats.con.consess{1}.tcon.sessrep = 'replsc';
+matlabbatch{3}.spm.stats.con.consess{2}.tcon.name = '+control-stress';
+matlabbatch{3}.spm.stats.con.consess{2}.tcon.weights = [+1, -1]./runN;
+matlabbatch{3}.spm.stats.con.consess{2}.tcon.sessrep = 'replsc';
+matlabbatch{3}.spm.stats.con.delete = 1;
