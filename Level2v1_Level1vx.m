@@ -74,9 +74,9 @@ matlabbatch{3}.spm.stats.factorial_design.globalm.glonorm = 1;
 
 
 % estimate
-fprintf('%%% FOR ESTIMATION %%%')
+fprintf('% FOR ESTIMATION \n\n')
 fprintf('matlabbatch = {};\n')
-fprintf('matlabbatch{1}.spm.stats.fmri_est.spmmat(1)= {%s};\n',fullfile(Level2Dir,'SPM.mat'));
+fprintf('matlabbatch{1}.spm.stats.fmri_est.spmmat(1)= {''%s''};\n',fullfile(Level2Dir,'SPM.mat'));
 fprintf('matlabbatch{1}.spm.stats.fmri_est.write_residuals = 0;');
 fprintf('matlabbatch{1}.spm.stats.fmri_est.method.Classical = 1;');
 fprintf('spm(''defaults'',''FMRI'')\n');
