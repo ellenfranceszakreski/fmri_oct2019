@@ -84,10 +84,12 @@ fprintf('matlabbatch{1}.spm.stats.fmri_est.write_residuals = 0;\n');
 fprintf('matlabbatch{1}.spm.stats.fmri_est.method.Classical = 1;\n');
 fprintf('spm(''defaults'',''FMRI'')\n');
 fprintf('spm_jobman(''run'', matlabbatch)\n');
-fprintf('When done do:\nsftp -oPort=8764 zakell@ps395560.dreamhostps.com\n')
+
+fprintf('\n\n% When estimation is done in TERMINAL do:\n')
+fprintf('sftp -oPort=8764 zakell@ps395560.dreamhostps.com\n')
 fprintf('cd %s\n', Level2Dir);
 fprintf('lcd /Volumes/seagate6tb/fmri_oct2019/n')
-fprintf('get -r %s\n',Level2Dir);
+fprintf('get -r %s\n\n',Level2Dir);
 
 %% estimate
 %matlabbatch{4}.spm.stats.fmri_est.spmmat(1) = cfg_dep('Factorial design specification: SPM.mat File',...
