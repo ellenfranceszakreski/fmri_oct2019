@@ -95,5 +95,5 @@ spm('defaults','FMRI');
 spm_jobman('run',matlabbatch);
 
 
-
+end
 
