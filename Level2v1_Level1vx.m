@@ -72,18 +72,23 @@ matlabbatch{3}.spm.stats.factorial_design.globalc.g_omit = 1;
 matlabbatch{3}.spm.stats.factorial_design.globalm.gmsca.gmsca_no = 1;
 matlabbatch{3}.spm.stats.factorial_design.globalm.glonorm = 1;
 
-
-% estimate
-fprintf('% FOR ESTIMATION \n\n')
-fprintf('matlabbatch = {};\n')
-fprintf('matlabbatch{1}.spm.stats.fmri_est.spmmat(1)= {''%s''};\n',fullfile(Level2Dir,'SPM.mat'));
-fprintf('matlabbatch{1}.spm.stats.fmri_est.write_residuals = 0;');
-fprintf('matlabbatch{1}.spm.stats.fmri_est.method.Classical = 1;');
-fprintf('spm(''defaults'',''FMRI'')\n');
-fprintf('spm_jobman(''run'', matlabbatch)\n');
 % run
 spm('defaults','FMRI');
 spm_jobman('run',matlabbatch);
+
+% estimate
+fprintf('% ====FOR ESTIMATION==== \n% copy+paste commands below\n')
+fprintf('matlabbatch = {};\n')
+fprintf('matlabbatch{1}.spm.stats.fmri_est.spmmat(1)= {''%s''};\n',fullfile(Level2Dir,'SPM.mat'));
+fprintf('matlabbatch{1}.spm.stats.fmri_est.write_residuals = 0;\n');
+fprintf('matlabbatch{1}.spm.stats.fmri_est.method.Classical = 1;\n');
+fprintf('spm(''defaults'',''FMRI'')\n');
+fprintf('spm_jobman(''run'', matlabbatch)\n');
+fprintf('When done do:\nsftp -oPort=8764 zakell@ps395560.dreamhostps.com\n')
+fprintf('cd %s\n', Level2Dir);
+fprintf('lcd /Volumes/seagate6tb/fmri_oct2019/n')
+fprintf('get -r %s\n',Level2Dir);
+
 %% estimate
 %matlabbatch{4}.spm.stats.fmri_est.spmmat(1) = cfg_dep('Factorial design specification: SPM.mat File',...
  %   substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
